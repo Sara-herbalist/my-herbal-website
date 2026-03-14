@@ -168,36 +168,44 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 1.5rem 4rem;
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(253,250,247,0); /* starts transparent over hero */
-    backdrop-filter: blur(0px);
+    background: rgba(92,74,58,0.15); /* subtle dark tint so text reads on both sides */
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid transparent;
     transition: background .4s, backdrop-filter .4s, border-color .4s;
   }
   nav.scrolled {
-    background: rgba(253,250,247,0.93);
-    backdrop-filter: blur(10px);
+    background: rgba(253,250,247,0.96);
+    backdrop-filter: blur(12px);
     border-bottom-color: rgba(122,108,100,0.1);
   }
   .nav-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.2rem; font-weight: 400;
     letter-spacing: .12em; text-transform: uppercase;
-    color: var(--bark); text-decoration: none;
+    color: var(--cream); text-decoration: none;
+    transition: color .4s;
   }
+  nav.scrolled .nav-logo { color: var(--bark); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     font-size: .9375rem; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--muted); text-decoration: none; transition: color .2s;
+    color: rgba(247,243,238,.85); text-decoration: none; transition: color .2s;
   }
-  .nav-links a:hover { color: var(--bark); }
+  nav.scrolled .nav-links a { color: var(--muted); }
+  .nav-links a:hover, nav.scrolled .nav-links a:hover { color: var(--bark); }
   .nav-book {
     font-size: .9375rem; letter-spacing: .16em; text-transform: uppercase;
     padding: .7rem 1.8rem;
-    border: 1px solid var(--bark);
-    color: var(--bark); text-decoration: none;
-    transition: all .22s;
+    border: 1px solid rgba(247,243,238,.7);
+    color: var(--cream); text-decoration: none;
+    transition: all .3s;
   }
-  .nav-book:hover { background: var(--bark); color: var(--warm-white); }
+  nav.scrolled .nav-book {
+    border-color: var(--bark);
+    color: var(--bark);
+  }
+  .nav-book:hover { background: var(--cream); color: var(--bark); border-color: var(--cream); }
+  nav.scrolled .nav-book:hover { background: var(--bark); color: var(--cream); border-color: var(--bark); }
 
   /* ── HERO ── */
   .hero {
@@ -222,9 +230,10 @@
     pointer-events: none;
   }
   .hero-eyebrow {
-    font-size: .75rem; letter-spacing: .24em; text-transform: uppercase;
+    font-size: .75rem; letter-spacing: .22em; text-transform: uppercase;
     color: var(--sage-light); margin-bottom: 2rem;
     opacity: 0; animation: fadeUp .8s .1s forwards;
+    line-height: 1.6;
   }
   .hero-name {
     font-family: 'Cormorant Garamond', serif;
@@ -235,13 +244,13 @@
   }
   .hero-name em { font-style: italic; color: var(--sage-light); }
   .hero-credentials {
-    font-size: .9375rem; letter-spacing: .1em;
-    color: rgba(247,243,238,.45); margin-bottom: 3.5rem;
+    font-size: 1rem; letter-spacing: .06em;
+    color: rgba(247,243,238,.55); margin-bottom: 3.5rem;
     opacity: 0; animation: fadeUp .8s .4s forwards;
     line-height: 2;
   }
   .hero-desc {
-    font-size: 1.0625rem; color: rgba(247,243,238,.7);
+    font-size: 1.0625rem; color: rgba(247,243,238,.82);
     line-height: 1.9; max-width: 440px; margin-bottom: 3rem;
     opacity: 0; animation: fadeUp .8s .5s forwards;
   }
@@ -937,16 +946,28 @@
   }
 
 
-  /* Language toggle */
+
   .lang-toggle {
     font-size: .75rem; letter-spacing: .16em; text-transform: uppercase;
-    padding: .45rem .9rem; border: 1px solid rgba(92,74,58,.35);
-    background: none; color: var(--muted); cursor: pointer;
+    padding: .45rem .9rem; border: 1px solid rgba(247,243,238,.5);
+    background: none; color: rgba(247,243,238,.85); cursor: pointer;
     font-family: 'Jost', sans-serif; border-radius: 2px;
-    transition: all .2s; margin-left: .5rem;
+    transition: all .3s; margin-left: .5rem;
   }
-  .lang-toggle:hover { border-color: var(--bark); color: var(--bark); }
-  [data-lang="fr"] .lang-toggle { border-color: var(--bark); color: var(--bark); }
+  nav.scrolled .lang-toggle { border-color: rgba(92,74,58,.35); color: var(--muted); }
+  .lang-toggle:hover, nav.scrolled .lang-toggle:hover { border-color: var(--bark); color: var(--bark); }
+
+
+  /* Pages with light-coloured heroes — nav starts dark */
+  body[data-nav="light"] nav {
+    background: rgba(253,250,247,0.85);
+    backdrop-filter: blur(8px);
+  }
+  body[data-nav="light"] .nav-logo { color: var(--bark); }
+  body[data-nav="light"] .nav-links a { color: var(--muted); }
+  body[data-nav="light"] .nav-links a:hover { color: var(--bark); }
+  body[data-nav="light"] .nav-book { border-color: var(--bark); color: var(--bark); }
+  body[data-nav="light"] .lang-toggle { border-color: rgba(92,74,58,.35); color: var(--muted); }
 
 </style>
 </head>
