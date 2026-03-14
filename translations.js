@@ -2,6 +2,14 @@
 // EN (English) and FR (French)
 // Used by i18n.js to swap language without page reload
 
+// Auto-inject nav stylesheet on every page
+(function () {
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'nav-override.css';
+  document.head.appendChild(link);
+})();
+
 window.SL_TRANSLATIONS = {
 
   // ─── SHARED / NAV ────────────────────────────────────────────────────────
